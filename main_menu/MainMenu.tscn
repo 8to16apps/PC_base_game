@@ -1,0 +1,147 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://main_menu/MainMenu.gd" type="Script" id=1]
+[ext_resource path="res://fonts/MidFont.tres" type="DynamicFont" id=3]
+[ext_resource path="res://popups/Options.tscn" type="PackedScene" id=6]
+[ext_resource path="res://popups/ExitPopup.tscn" type="PackedScene" id=7]
+[ext_resource path="res://fonts/BigFont.tres" type="DynamicFont" id=8]
+
+[sub_resource type="Gradient" id=1]
+colors = PoolColorArray( 0.636719, 0.636719, 0.636719, 1, 0, 0, 0, 1 )
+
+[sub_resource type="GradientTexture2D" id=2]
+gradient = SubResource( 1 )
+width = 1920
+height = 1080
+fill_from = Vector2( 0, 0.108333 )
+fill_to = Vector2( 0, 1 )
+
+[node name="MainMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+menu = NodePath("CenterContainer/AspectRatioContainer/Menu")
+options = NodePath("CenterContainer/AspectRatioContainer/Options")
+confirm_popup = NodePath("CenterContainer/AspectRatioContainer/Menu/ConfirmPopup")
+continueBtn = NodePath("CenterContainer/AspectRatioContainer/Menu/MenuBox/Continue")
+new_game = NodePath("CenterContainer/AspectRatioContainer/Menu/MenuBox/NewGame")
+NewGameScene = "res://main_game/MainGame.tscn"
+
+[node name="FarBackground" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 1920, 1080 )
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = SubResource( 2 )
+expand = true
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="CenterContainer"]
+margin_right = 1920.0
+margin_bottom = 1080.0
+rect_min_size = Vector2( 1920, 1080 )
+ratio = 1.7778
+
+[node name="Menu" type="Control" parent="CenterContainer/AspectRatioContainer"]
+margin_left = -6.10352e-05
+margin_top = 0.00671387
+margin_right = 1920.0
+margin_bottom = 1079.99
+
+[node name="Title" type="Label" parent="CenterContainer/AspectRatioContainer/Menu"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -592.0
+margin_top = 72.0
+margin_right = 592.0
+margin_bottom = 298.0
+custom_fonts/font = ExtResource( 8 )
+text = "BASE GAME
+by DAVID PULIDO"
+align = 1
+valign = 1
+
+[node name="MenuBox" type="VBoxContainer" parent="CenterContainer/AspectRatioContainer/Menu"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -248.0
+margin_top = -552.987
+margin_right = 248.0
+margin_bottom = -135.987
+custom_constants/separation = 24
+
+[node name="Continue" type="Button" parent="CenterContainer/AspectRatioContainer/Menu/MenuBox"]
+margin_right = 496.0
+margin_bottom = 54.0
+rect_min_size = Vector2( 0, 54 )
+focus_neighbour_top = NodePath("../Exit")
+focus_neighbour_bottom = NodePath("../NewGame")
+focus_next = NodePath("../NewGame")
+focus_previous = NodePath("../Exit")
+size_flags_vertical = 0
+custom_fonts/font = ExtResource( 3 )
+disabled = true
+text = "CONTINUE"
+
+[node name="NewGame" type="Button" parent="CenterContainer/AspectRatioContainer/Menu/MenuBox"]
+margin_top = 78.0
+margin_right = 496.0
+margin_bottom = 132.0
+rect_min_size = Vector2( 0, 54 )
+focus_neighbour_top = NodePath("../Continue")
+focus_neighbour_bottom = NodePath("../Options")
+focus_next = NodePath("../Options")
+focus_previous = NodePath("../Continue")
+size_flags_vertical = 0
+custom_fonts/font = ExtResource( 3 )
+text = "NEW GAME"
+
+[node name="Options" type="Button" parent="CenterContainer/AspectRatioContainer/Menu/MenuBox"]
+margin_top = 156.0
+margin_right = 496.0
+margin_bottom = 210.0
+rect_min_size = Vector2( 0, 54 )
+focus_neighbour_top = NodePath("../NewGame")
+focus_neighbour_bottom = NodePath("../Exit")
+focus_next = NodePath("../Exit")
+focus_previous = NodePath("../NewGame")
+size_flags_vertical = 0
+custom_fonts/font = ExtResource( 3 )
+text = "OPTIONS"
+
+[node name="Exit" type="Button" parent="CenterContainer/AspectRatioContainer/Menu/MenuBox"]
+margin_top = 363.0
+margin_right = 496.0
+margin_bottom = 417.0
+rect_min_size = Vector2( 0, 54 )
+size_flags_vertical = 10
+custom_fonts/font = ExtResource( 3 )
+text = "EXIT"
+
+[node name="ConfirmPopup" parent="CenterContainer/AspectRatioContainer/Menu" instance=ExtResource( 7 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 618.0
+margin_top = 117.0
+margin_right = 1302.0
+margin_bottom = 963.0
+
+[node name="Options" parent="CenterContainer/AspectRatioContainer" instance=ExtResource( 6 )]
+visible = false
+
+[connection signal="pressed" from="CenterContainer/AspectRatioContainer/Menu/MenuBox/Continue" to="." method="_on_Continue_pressed"]
+[connection signal="pressed" from="CenterContainer/AspectRatioContainer/Menu/MenuBox/NewGame" to="." method="_on_NewGame_pressed"]
+[connection signal="pressed" from="CenterContainer/AspectRatioContainer/Menu/MenuBox/Options" to="." method="_on_Options_pressed"]
+[connection signal="pressed" from="CenterContainer/AspectRatioContainer/Menu/MenuBox/Exit" to="." method="_on_Exit_pressed"]
+[connection signal="exit_pressed" from="CenterContainer/AspectRatioContainer/Menu/ConfirmPopup" to="." method="_on_Yes_pressed"]
+[connection signal="close_pressed" from="CenterContainer/AspectRatioContainer/Options" to="." method="_on_Back_pressed"]

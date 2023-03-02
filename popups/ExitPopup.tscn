@@ -1,0 +1,97 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://fonts/BigFont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://fonts/MidFont.tres" type="DynamicFont" id=3]
+[ext_resource path="res://popups/ExitPopup.gd" type="Script" id=7]
+
+[node name="ExitPopup" type="PopupDialog"]
+pause_mode = 2
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -398.0
+margin_top = -478.993
+margin_right = 398.0
+margin_bottom = 455.007
+script = ExtResource( 7 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 28.0
+margin_top = 20.0
+margin_right = -28.0
+margin_bottom = -22.0
+
+[node name="Title" type="Label" parent="VBoxContainer"]
+margin_top = 82.0
+margin_right = 740.0
+margin_bottom = 121.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+custom_fonts/font = ExtResource( 1 )
+text = "ENTES DE SALIR"
+align = 1
+valign = 1
+
+[node name="Survey" type="RichTextLabel" parent="VBoxContainer"]
+margin_top = 207.0
+margin_right = 740.0
+margin_bottom = 477.0
+rect_min_size = Vector2( 0, 128 )
+size_flags_horizontal = 3
+size_flags_vertical = 6
+custom_fonts/normal_font = ExtResource( 3 )
+bbcode_enabled = true
+bbcode_text = "[center]Quiero saber tu opinion[/center]
+Este juego es un ALPHA o mas bien una prueba de concepto.
+Me gustaria conocer tus impresiones sobre el juego.
+[url=<>][color=blue]Aqui[/color][/url] encontraras un cuestionario que puede ayudarme
+Gracias por el tiempo que le has dedicado al juego."
+text = "Quiero saber tu opinion
+Este juego es un ALPHA o mas bien una prueba de concepto.
+Me gustaria conocer tus impresiones sobre el juego.
+Aqui encontraras un cuestionario que puede ayudarme
+Gracias por el tiempo que le has dedicado al juego."
+fit_content_height = true
+scroll_active = false
+
+[node name="Subscribe" type="Label" parent="VBoxContainer"]
+margin_top = 563.0
+margin_right = 740.0
+margin_bottom = 602.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+custom_fonts/font = ExtResource( 1 )
+text = "Subscribete a mi substrack"
+align = 1
+valign = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 740.0
+margin_right = 740.0
+margin_bottom = 840.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+
+[node name="No" type="Button" parent="VBoxContainer/HBoxContainer"]
+margin_right = 250.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 250, 100 )
+size_flags_horizontal = 2
+custom_fonts/font = ExtResource( 3 )
+text = "VOLVER"
+
+[node name="Yes" type="Button" parent="VBoxContainer/HBoxContainer"]
+margin_left = 490.0
+margin_right = 740.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 250, 100 )
+size_flags_horizontal = 10
+custom_fonts/font = ExtResource( 3 )
+text = "SALIR"
+
+[connection signal="meta_clicked" from="VBoxContainer/Survey" to="." method="_on_Survey_meta_clicked"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/No" to="." method="_on_No_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Yes" to="." method="_on_Yes_pressed"]

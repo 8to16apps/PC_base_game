@@ -1,0 +1,113 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://fonts/MidFont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://fonts/BigFont.tres" type="DynamicFont" id=5]
+[ext_resource path="res://popups/Options.tscn" type="PackedScene" id=6]
+[ext_resource path="res://in_game_menu/InGameMenu.gd" type="Script" id=7]
+
+[node name="InGameMenu" type="Control"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 7 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.501961 )
+
+[node name="Menu" type="Control" parent="."]
+margin_left = -6.10352e-05
+margin_top = 0.00671387
+margin_right = 1920.0
+margin_bottom = 1079.99
+
+[node name="Title" type="Label" parent="Menu"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -592.0
+margin_top = 72.0
+margin_right = 592.0
+margin_bottom = 168.0
+custom_fonts/font = ExtResource( 5 )
+text = "BASE GAME
+PAUSE"
+align = 1
+valign = 1
+
+[node name="MenuBox" type="VBoxContainer" parent="Menu"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -248.0
+margin_top = -756.987
+margin_right = 248.0
+margin_bottom = -135.987
+custom_constants/separation = 24
+
+[node name="Continue" type="Button" parent="Menu/MenuBox"]
+margin_right = 495.0
+margin_bottom = 54.0
+rect_min_size = Vector2( 0, 54 )
+focus_neighbour_bottom = NodePath("../NewGame")
+focus_next = NodePath("../NewGame")
+size_flags_vertical = 0
+custom_fonts/font = ExtResource( 1 )
+text = "CONTINUE"
+
+[node name="NewGame" type="Button" parent="Menu/MenuBox"]
+margin_top = 78.0
+margin_right = 495.0
+margin_bottom = 132.0
+rect_min_size = Vector2( 0, 54 )
+focus_neighbour_top = NodePath("../Continue")
+focus_neighbour_bottom = NodePath("../Options")
+focus_next = NodePath("../Options")
+focus_previous = NodePath("../Continue")
+size_flags_vertical = 0
+custom_fonts/font = ExtResource( 1 )
+text = "NEW GAME"
+
+[node name="Options" type="Button" parent="Menu/MenuBox"]
+margin_top = 156.0
+margin_right = 495.0
+margin_bottom = 210.0
+rect_min_size = Vector2( 0, 54 )
+focus_neighbour_top = NodePath("../NewGame")
+focus_previous = NodePath("../NewGame")
+size_flags_vertical = 0
+custom_fonts/font = ExtResource( 1 )
+text = "OPTIONS"
+
+[node name="MainMenu" type="Button" parent="Menu/MenuBox"]
+margin_top = 234.0
+margin_right = 495.0
+margin_bottom = 288.0
+rect_min_size = Vector2( 0, 54 )
+focus_neighbour_top = NodePath("../NewGame")
+focus_previous = NodePath("../NewGame")
+size_flags_vertical = 0
+custom_fonts/font = ExtResource( 1 )
+text = "MAIN MENU"
+
+[node name="Quit" type="Button" parent="Menu/MenuBox"]
+margin_top = 312.0
+margin_right = 495.0
+margin_bottom = 366.0
+rect_min_size = Vector2( 0, 54 )
+focus_neighbour_top = NodePath("../NewGame")
+focus_previous = NodePath("../NewGame")
+size_flags_vertical = 0
+custom_fonts/font = ExtResource( 1 )
+text = "Quit"
+
+[node name="Options" parent="." instance=ExtResource( 6 )]
+visible = false
+
+[connection signal="pressed" from="Menu/MenuBox/Continue" to="." method="_on_Continue_pressed"]
+[connection signal="pressed" from="Menu/MenuBox/NewGame" to="." method="_on_NewGame_pressed"]
+[connection signal="pressed" from="Menu/MenuBox/Options" to="." method="_on_Options_pressed"]
+[connection signal="pressed" from="Menu/MenuBox/MainMenu" to="." method="_on_MainMenu_pressed"]
+[connection signal="pressed" from="Menu/MenuBox/Quit" to="." method="_on_Quit_pressed"]
+[connection signal="close_pressed" from="Options" to="." method="_on_Options_close_pressed"]

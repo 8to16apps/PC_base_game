@@ -1,0 +1,153 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://main_game/MainGame.gd" type="Script" id=1]
+[ext_resource path="res://fonts/BigFont.tres" type="DynamicFont" id=4]
+[ext_resource path="res://fonts/MidFont.tres" type="DynamicFont" id=7]
+[ext_resource path="res://in_game_menu/InGameMenu.tscn" type="PackedScene" id=9]
+[ext_resource path="res://popups/ExitPopup.tscn" type="PackedScene" id=10]
+
+[sub_resource type="Gradient" id=4]
+
+[sub_resource type="GradientTexture" id=5]
+gradient = SubResource( 4 )
+
+[sub_resource type="Gradient" id=3]
+colors = PoolColorArray( 0.609375, 0.609375, 0.609375, 1, 0, 0, 0, 1 )
+
+[sub_resource type="GradientTexture2D" id=2]
+gradient = SubResource( 3 )
+width = 1920
+height = 1080
+fill_from = Vector2( 0, 0.108333 )
+fill_to = Vector2( 0, 1 )
+
+[node name="MainGame" type="Node"]
+script = ExtResource( 1 )
+in_game_menu = NodePath("CenterScreen/CenterContainer/AspectRatioContainer/Popups/InGameMenu")
+exit_popup = NodePath("CenterScreen/CenterContainer/AspectRatioContainer/Popups/ExitPopup")
+return_to_menu = NodePath("CenterScreen/CenterContainer/AspectRatioContainer/Popups/ReturnToMenu")
+MainMenuScene = "res://main_menu/MainMenu.tscn"
+
+[node name="CenterScreen" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+size_flags_horizontal = 3
+
+[node name="TextureRect" type="TextureRect" parent="CenterScreen"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+texture = SubResource( 5 )
+expand = true
+
+[node name="CenterContainer" type="CenterContainer" parent="CenterScreen"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+size_flags_horizontal = 3
+
+[node name="FarBackground" type="TextureRect" parent="CenterScreen/CenterContainer"]
+margin_right = 1920.0
+margin_bottom = 1080.0
+rect_min_size = Vector2( 1920, 1080 )
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = SubResource( 2 )
+expand = true
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="CenterScreen/CenterContainer"]
+margin_right = 1920.0
+margin_bottom = 1080.0
+rect_min_size = Vector2( 1920, 1080 )
+mouse_filter = 2
+ratio = 1.7778
+
+[node name="Game" type="Node2D" parent="CenterScreen/CenterContainer/AspectRatioContainer"]
+
+[node name="Popups" type="Control" parent="CenterScreen/CenterContainer/AspectRatioContainer"]
+margin_left = -6.10352e-05
+margin_top = 0.00671387
+margin_right = 1920.0
+margin_bottom = 1079.99
+mouse_filter = 2
+
+[node name="InGameMenu" parent="CenterScreen/CenterContainer/AspectRatioContainer/Popups" instance=ExtResource( 9 )]
+visible = false
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 1920.0
+margin_bottom = 1080.0
+rect_min_size = Vector2( 1920, 1080 )
+
+[node name="ExitPopup" parent="CenterScreen/CenterContainer/AspectRatioContainer/Popups" instance=ExtResource( 10 )]
+margin_top = -467.0
+margin_bottom = 467.0
+
+[node name="ReturnToMenu" type="PopupDialog" parent="CenterScreen/CenterContainer/AspectRatioContainer/Popups"]
+pause_mode = 2
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -392.0
+margin_top = -224.993
+margin_right = 392.0
+margin_bottom = 225.007
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 650, 450 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterScreen/CenterContainer/AspectRatioContainer/Popups/ReturnToMenu"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 28.0
+margin_top = 20.0
+margin_right = -28.0
+margin_bottom = -22.0
+
+[node name="Label" type="Label" parent="CenterScreen/CenterContainer/AspectRatioContainer/Popups/ReturnToMenu/VBoxContainer"]
+margin_top = 60.0
+margin_right = 728.0
+margin_bottom = 141.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+custom_fonts/font = ExtResource( 4 )
+text = "¿QUIERES VOLVER AL MENU PRINCIPAL?"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterScreen/CenterContainer/AspectRatioContainer/Popups/ReturnToMenu/VBoxContainer"]
+margin_top = 257.0
+margin_right = 728.0
+margin_bottom = 357.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+
+[node name="No" type="Button" parent="CenterScreen/CenterContainer/AspectRatioContainer/Popups/ReturnToMenu/VBoxContainer/HBoxContainer"]
+margin_right = 250.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 250, 100 )
+size_flags_horizontal = 2
+custom_fonts/font = ExtResource( 7 )
+text = "NO"
+
+[node name="Yes" type="Button" parent="CenterScreen/CenterContainer/AspectRatioContainer/Popups/ReturnToMenu/VBoxContainer/HBoxContainer"]
+margin_left = 478.0
+margin_right = 728.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 250, 100 )
+size_flags_horizontal = 10
+custom_fonts/font = ExtResource( 7 )
+text = "SI"
+
+[connection signal="exit_pressed" from="CenterScreen/CenterContainer/AspectRatioContainer/Popups/InGameMenu" to="." method="_on_InGameMenu_exit_pressed"]
+[connection signal="main_menu" from="CenterScreen/CenterContainer/AspectRatioContainer/Popups/InGameMenu" to="." method="_on_InGameMenu_main_menu"]
+[connection signal="new_game" from="CenterScreen/CenterContainer/AspectRatioContainer/Popups/InGameMenu" to="." method="_on_InGameMenu_new_game"]
+[connection signal="quit" from="CenterScreen/CenterContainer/AspectRatioContainer/Popups/InGameMenu" to="." method="_on_InGameMenu_quit"]
+[connection signal="continue_pressed" from="CenterScreen/CenterContainer/AspectRatioContainer/Popups/ExitPopup" to="." method="_on_No_pressed"]
+[connection signal="exit_pressed" from="CenterScreen/CenterContainer/AspectRatioContainer/Popups/ExitPopup" to="." method="_on_Yes_pressed"]
+[connection signal="pressed" from="CenterScreen/CenterContainer/AspectRatioContainer/Popups/ReturnToMenu/VBoxContainer/HBoxContainer/No" to="." method="_on_MainMenu_No_pressed"]
+[connection signal="pressed" from="CenterScreen/CenterContainer/AspectRatioContainer/Popups/ReturnToMenu/VBoxContainer/HBoxContainer/Yes" to="." method="_on_MainMenu_Yes_pressed"]

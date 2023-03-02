@@ -1,0 +1,63 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "Reference",
+"class": "State",
+"language": "GDScript",
+"path": "res://state_machine/State.gd"
+}, {
+"base": "Reference",
+"class": "StateMachine",
+"language": "GDScript",
+"path": "res://state_machine/StateMachine.gd"
+} ]
+_global_script_class_icons={
+"State": "",
+"StateMachine": ""
+}
+
+[application]
+
+config/name="Base_Game"
+run/main_scene="res://main_menu/MainMenu.tscn"
+config/icon="res://icon.png"
+config/auto_accept_quit=false
+
+[autoload]
+
+OptionsData="*res://autoloads/OptionsData.gd"
+GameData="*res://autoloads/GameData.gd"
+KeyPersistence="*res://autoloads/KeyPersistence.gd"
+
+[display]
+
+window/size/width=1920
+window/size/height=1080
+window/size/test_width=1024
+window/size/test_height=576
+window/stretch/mode="viewport"
+window/stretch/aspect="keep_height"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/godot_icon/plugin.cfg" )
+
+[gui]
+
+common/drop_mouse_on_gui_input_disabled=true
+
+[physics]
+
+common/enable_pause_aware_picking=true
+
+[rendering]
+
+environment/default_environment="res://default_env.tres"
